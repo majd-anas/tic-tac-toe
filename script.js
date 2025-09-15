@@ -136,14 +136,14 @@ const runGame=function(){
     const player1=Player("x",1);
     const player2=Player("o",2);
     let winner=false;
-
     while(turns){
-        
+
         if(turns%2!=0){
             index=GameLogic.makePlay(player1);
             if(GameLogic.winCheck(player1,index)){
                 winner=player1.number;
                 console.log(GameBoard.getBoard());
+                DisplayControls.cellContent();
                 break;
             }
         }
@@ -153,6 +153,7 @@ const runGame=function(){
             if(GameLogic.winCheck(player2,index)){
                 winner=player2.number;
                 console.log(GameBoard.getBoard());
+                DisplayControls.cellContent();
                 break;
             }
         }
@@ -166,17 +167,28 @@ const runGame=function(){
 }
 
 const DisplayControls=(function(){
-    const cell=document.querySelectorAll(".cell");
-
-    cellClicked=function(){
-        cell.forEach((cell)=>
-        {
-        cell.addEventListener("click",()=> cell.dataset.index);
-
+    const cells=document.querySelectorAll(".cell");
+    const board=GameBoard.getBoard();
+    const cellContent=function(){cells.forEach((cell)=>{
+        if(board[cell.dataset.index]!=0)
+            cell.textContent=board[cell.dataset.index];
+        else
+            cell.textContent="";
+    })}
+    
+    const cellClicked=function(){
+        cells.forEach((cell)=>{
+            cell.addEventListener("click",(e)=>{
+                    e.target.dataset.index;
+                    console.log(e.target.dataset.index);
+                })
         });
     }
+    return{
+        cellContent,cellClicked
+    }
 
-    
 
 })();
 
+runGame();
