@@ -122,9 +122,7 @@ const DisplayControls=(function(){
     }
 
     const startGame=function(){
-        start.addEventListener("click",()=>{choose()
-            console.log("start game clicked");
-        });
+        start.addEventListener("click",choose);
     }
 
     return{
